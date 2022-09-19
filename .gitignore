@@ -1,0 +1,8 @@
+.DS_Store
+.project
+.settings
+scripts/node_modules
+scripts/package-lock.json
+private
+
+# scripts/images
