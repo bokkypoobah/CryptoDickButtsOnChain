@@ -309,7 +309,7 @@ Saved image to test/generatedimage_1940.gif
 
 ##### Generated Image
 
-<kbd><img src="test/generatedimage_1940.gif" width="300px" height="300px" style="image-rendering: pixelated; " /></kbd>
+<kbd><img src="test/generatedimage_1940.gif" /></kbd>
 
 
 <br />
