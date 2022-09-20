@@ -3,6 +3,7 @@ const { singletons, expectRevert } = require("@openzeppelin/test-helpers");
 const { expect, assert } = require("chai");
 const { BigNumber } = require("ethers");
 const util = require('util');
+const setupData = require('./setupData.json');
 
 let data;
 
@@ -12,6 +13,7 @@ describe("CryptoDickbuttsChained", function () {
   beforeEach(async function () {
     console.log();
     console.log("      beforeEach");
+
     data = new Data();
     await data.init();
 
@@ -97,18 +99,27 @@ describe("CryptoDickbuttsChained", function () {
       await data.printEvents("Deployed CryptoDickbuttsChained", cryptoDickbuttsChainedReceipt);
     }
 
-    // TODO: setData
-
     const setup1 = [];
-    setup1.push(data.cryptoDickbuttsChained.setEncoder(data.gifEncoder.address));
-    setup1.push(data.cryptoDickbuttsChained.setRenderer(data.pixelRenderer.address));
-    setup1.push(data.cryptoDickbuttsChained.setSVGWrapper(data.svgWrapper.address));
-    setup1.push(data.cryptoDickbuttsChained.setTokenURIBuilder(data.tokenURIBuilder.address));
-    setup1.push(data.cryptoDickbuttsChained.setMetadata(data.cryptoDickbuttsMetadata.address));
-    setup1.push(data.cryptoDickbuttsChained.setBuilder(data.cryptoDickbuttsBuilder.address));
-    setup1.push(data.cryptoDickbuttsChained.setStrings(data.cryptoDickbuttsStrings.address));
-    setup1.push(data.cryptoDickbuttsChained.setRandom(data.cryptoDickbuttsRandom.address));
-    const mintATxs = await Promise.all(setup1);
+    for (const item of setupData) {
+      setup1.push(data.cryptoDickbuttsBuilder.setData(item.key, item.imageData));
+    }
+    const setup1Txs = await Promise.all(setup1);
+    if (DETAILS > 0) {
+      setup1Txs.forEach( async function (a) {
+        await data.printEvents("cryptoDickbuttsBuilder.setData(key, imageData)", await a.wait());
+      });
+    }
+
+    const setup2 = [];
+    setup2.push(data.cryptoDickbuttsChained.setEncoder(data.gifEncoder.address));
+    setup2.push(data.cryptoDickbuttsChained.setRenderer(data.pixelRenderer.address));
+    setup2.push(data.cryptoDickbuttsChained.setSVGWrapper(data.svgWrapper.address));
+    setup2.push(data.cryptoDickbuttsChained.setTokenURIBuilder(data.tokenURIBuilder.address));
+    setup2.push(data.cryptoDickbuttsChained.setMetadata(data.cryptoDickbuttsMetadata.address));
+    setup2.push(data.cryptoDickbuttsChained.setBuilder(data.cryptoDickbuttsBuilder.address));
+    setup2.push(data.cryptoDickbuttsChained.setStrings(data.cryptoDickbuttsStrings.address));
+    setup2.push(data.cryptoDickbuttsChained.setRandom(data.cryptoDickbuttsRandom.address));
+    const mintATxs = await Promise.all(setup2);
     if (DETAILS > 0) {
       mintATxs.forEach( async function (a) {
         await data.printEvents("cryptoDickbuttsChained.setX(x)", await a.wait());
