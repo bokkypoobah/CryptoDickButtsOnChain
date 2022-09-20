@@ -8,6 +8,26 @@ This repo contains a copy of the CryptoDickButtOnChain contracts manually extrac
 
 <br />
 
+### UI
+
+See [https://bokkypoobah.github.io/CryptoDickButtsOnChain/](https://bokkypoobah.github.io/CryptoDickButtsOnChain/).
+
+<br />
+
+### Extracting Image Setup Data From Mainnet
+
+In [scripts](scripts):
+
+```
+node 02_generateSetupData.js
+```
+
+The transaction setup data for the images can be found in [scripts/setupData.json](scripts/setupData.json). A copy of this file has been made in the [test](test) folder to set up the same data in a dev environment.
+
+<br />
+
+### Generating Metadata and Image In This Dev Environment
+
 ```
 $ npx hardhat test
 
@@ -311,10 +331,6 @@ Saved image to test/generatedimage_1940.gif
 
 <kbd><img src="test/generatedimage_1940.gif" /></kbd>
 
-
-<br />
-
-See [https://bokkypoobah.github.io/CryptoDickButtsOnChain/](https://bokkypoobah.github.io/CryptoDickButtsOnChain/).
 
 <br />
 
