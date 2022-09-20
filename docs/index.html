@@ -131,7 +131,14 @@
               </div>
             </div>
             <b-card-text>
-              generatedImageData: {{ generatedImageData }}
+              <p>generatedImageData</p>
+              <div class="bg-light text-light">
+                <pre>
+                  <code class="json" v-if="generatedImageData !== null" style="display: inline-block;white-space: normal;max-width:100%; word-break:break-all; word-wrap:break-word;">
+{{ JSON.stringify(generatedImageData, null, 4) }}
+                  </code>
+                </pre>
+              </div>
             </b-card-text>
             <!-- <b-card-text v-if="generatedImageData != null"> -->
               <!-- <b-img width="220%" :src="punkImageSvg" /> -->
