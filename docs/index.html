@@ -129,7 +129,7 @@
                 </div>
               </div>
             </div>
-            <b-card-text class="mt-2">
+            <!-- <b-card-text class="mt-2"> -->
               <!-- <p>generatedImageData</p>
               <div class="bg-light text-light">
                 <pre>
@@ -138,8 +138,8 @@
                   </code>
                 </pre>
               </div> -->
-              <div id="generatedSVGId" style="background-color: #648595; width: 240px; height: 240px;"></div>
-            </b-card-text>
+              <!-- <div id="generatedSVGId" style="background-color: #648595; width: 240px; height: 240px;"></div> -->
+            <!-- </b-card-text> -->
             <!-- <b-card-text v-if="generatedImageData != null"> -->
               <!-- <b-img width="220%" :src="punkImageSvg" /> -->
               <!-- <div id="generatedSVGId" style="background-color: #648595; width: 240px; height: 240px;"></div> -->
@@ -177,26 +177,58 @@
               <b-card no-header no-body class="m-2 p-1">
                 <b-card-body class="m-0 p-0">
                   <b-card-text class="m-1 p-1">
-                    <b-form-group label-cols="2" label-size="sm" label-align="right" label="Collection:" class="mx-0 my-1 p-0">
+                    <b-form-group label-cols="3" label-size="sm" label-align="right" label="GIFEncoder:" class="mx-0 my-1 p-0">
+                      <b-link :href="'https://etherscan.io/token/0xFFb8011622aA191FAaD0F728F1257D72285089F1#code'" v-b-popover.hover.bottom="'View in Etherscan.io'" target="_blank">0xFFb8011622aA191FAaD0F728F1257D72285089F1</b-link>
+                    </b-form-group>
+                    <b-form-group label-cols="3" label-size="sm" label-align="right" label="PixelRenderer:" class="mx-0 my-1 p-0">
+                      <b-link :href="'https://etherscan.io/token/0xD9E3096f23c82C0605bd6956F37FCcD82C3d17f9#code'" v-b-popover.hover.bottom="'View in Etherscan.io'" target="_blank">0xD9E3096f23c82C0605bd6956F37FCcD82C3d17f9</b-link>
+                    </b-form-group>
+                    <b-form-group label-cols="3" label-size="sm" label-align="right" label="SVGWrapper:" class="mx-0 my-1 p-0">
+                      <b-link :href="'https://etherscan.io/token/0x00D84c231EF413bC293D969B0E7ced4317BED4Ba#code'" v-b-popover.hover.bottom="'View in Etherscan.io'" target="_blank">0x00D84c231EF413bC293D969B0E7ced4317BED4Ba</b-link>
+                    </b-form-group>
+                    <b-form-group label-cols="3" label-size="sm" label-align="right" label="TokenURIBuilder:" class="mx-0 my-1 p-0">
+                      <b-link :href="'https://etherscan.io/token/0x72337A16A0C0b8Cd662269500dBB97d2b88F6932#code'" v-b-popover.hover.bottom="'View in Etherscan.io'" target="_blank">0x72337A16A0C0b8Cd662269500dBB97d2b88F6932</b-link>
+                    </b-form-group>
+                    <b-form-group label-cols="3" label-size="sm" label-align="right" label="CryptoDickbuttsMetadata:" class="mx-0 my-1 p-0">
+                      <b-link :href="'https://etherscan.io/token/0x3585A7017dE132aE2f57e260DfdC1394f878bB0E#code'" v-b-popover.hover.bottom="'View in Etherscan.io'" target="_blank">0x3585A7017dE132aE2f57e260DfdC1394f878bB0E</b-link>
+                    </b-form-group>
+                    <b-form-group label-cols="3" label-size="sm" label-align="right" label="CryptoDickbuttsBuilder:" class="mx-0 my-1 p-0">
+                      <b-link :href="'https://etherscan.io/token/0xDf70e9434195c90CBBe377b2648A89Dd4FbCAD05#code'" v-b-popover.hover.bottom="'View in Etherscan.io'" target="_blank">0xDf70e9434195c90CBBe377b2648A89Dd4FbCAD05</b-link>
+                    </b-form-group>
+                    <b-form-group label-cols="3" label-size="sm" label-align="right" label="CryptoDickbuttsStrings:" class="mx-0 my-1 p-0">
+                      <b-link :href="'https://etherscan.io/token/0xA049A08B5c10807aBDbd95Cf8dC24670D3e6CB91#code'" v-b-popover.hover.bottom="'View in Etherscan.io'" target="_blank">0xA049A08B5c10807aBDbd95Cf8dC24670D3e6CB91</b-link>
+                    </b-form-group>
+                    <b-form-group label-cols="3" label-size="sm" label-align="right" label="CryptoDickbuttsRandom:" class="mx-0 my-1 p-0">
+                      <b-link :href="'https://etherscan.io/token/0x45Fe023E9ed87F626d250E54a935781d852BC4D8#code'" v-b-popover.hover.bottom="'View in Etherscan.io'" target="_blank">0x45Fe023E9ed87F626d250E54a935781d852BC4D8</b-link>
+                    </b-form-group>
+                    <b-form-group label-cols="3" label-size="sm" label-align="right" label="CryptoDickbuttsChained:" class="mx-0 my-1 p-0">
+                      <b-link :href="'https://etherscan.io/token/0x277a9984e8636c230C348A55314594769Cd63466#code'" v-b-popover.hover.bottom="'View in Etherscan.io'" target="_blank">0x277a9984e8636c230C348A55314594769Cd63466</b-link>
+                    </b-form-group>
+                    <b-form-group label-cols="3" label-size="sm" label-align="right" label="CryptoDickbutts Series 3 Collection:" class="mx-0 my-1 p-0">
+                      <b-link :href="'https://opensea.io/collection/cryptodickbutts-s3'" v-b-popover.hover.bottom="'View in OpenSea.io'" target="_blank">CryptoDickbutts</b-link>
+                    </b-form-group>
+                    <b-form-group label-cols="3" label-size="sm" label-align="right" label="CryptoDickbutts Series 3 Contract:" class="mx-0 my-1 p-0">
+                      <b-link :href="'https://etherscan.io/token/0x42069abfe407c60cf4ae4112bedead391dba1cdb'" v-b-popover.hover.bottom="'View in Etherscan.io'" target="_blank">0x42069abfe407c60cf4ae4112bedead391dba1cdb</b-link>
+                    </b-form-group>
+                    <b-form-group label-cols="3" label-size="sm" label-align="right" label="Collection Owner:" class="mx-0 my-1 p-0">
+                      <b-link :href="'https://twitter.com/CryptoDickbutts'" v-b-popover.hover.bottom="'View in Twitter.com'" target="_blank">@CryptoDickbutts</b-link>
+                    </b-form-group>
+                    <b-form-group label-cols="3" label-size="sm" label-align="right" label="This Dapp GitHub:" class="mx-0 my-1 p-0">
+                      <b-link :href="'https://github.com/bokkypoobah/CryptoDickButtsOnChain'" v-b-popover.hover.bottom="'View in GitHub.com. Feel free to clone and improve'" target="_blank">https://github.com/bokkypoobah/CryptoDickButtsOnChain</b-link>
+                    </b-form-group>
+                    <!--
+                    <b-form-group label-cols="3" label-size="sm" label-align="right" label="Collection:" class="mx-0 my-1 p-0">
                       <b-form-input type="text" readonly size="sm" :value="info.name" class="w-50"></b-form-input>
                     </b-form-group>
-                    <b-form-group label-cols="2" label-size="sm" label-align="right" label="Collection Address:" class="mx-0 my-1 p-0">
-                      <b-link :href="'https://etherscan.io/token/' + contractAddress" v-b-popover.hover.bottom="'View in Etherscan.io'" target="_blank">{{ contractAddress }}</b-link>
-                    </b-form-group>
-                    <b-form-group label-cols="2" label-size="sm" label-align="right" label="Collection Owner:" class="mx-0 my-1 p-0">
-                      <b-link :href="'https://twitter.com/proofofpepe'" v-b-popover.hover.bottom="'View in Twitter.com'" target="_blank">@proofofpepe</b-link>
-                    </b-form-group>
-                    <b-form-group label-cols="2" label-size="sm" label-align="right" label="Markets:" class="mx-0 my-1 p-0">
+                    <b-form-group label-cols="3" label-size="sm" label-align="right" label="Markets:" class="mx-0 my-1 p-0">
                       <b-link :href="'https://opensea.io/collection/proofofpepe'" target="_blank">OpenSea.io</b-link>,
                       <b-link :href="'https://looksrare.org/collections/' + contractAddress" target="_blank">LooksRare.org</b-link>,
                       <b-link :href="'https://x2y2.io/collection/proofofpepe/items'" target="_blank">X2Y2.io</b-link>,
                       <b-link :href="'https://sudoswap.xyz/#/browse/pools/' + contractAddress" target="_blank">sudoswap.xyz</b-link>,
                       <b-link :href="'https://www.gem.xyz/collection/proofofpepe/'" target="_blank">gem.xyz</b-link>
                     </b-form-group>
-                    <b-form-group label-cols="2" label-size="sm" label-align="right" label="This Dapp GitHub:" class="mx-0 my-1 p-0">
-                      <b-link :href="'https://github.com/bokkypoobah/ProofOfPepesInfo'" v-b-popover.hover.bottom="'View in GitHub.com. Feel free to clone and improve'" target="_blank">https://github.com/bokkypoobah/ProofOfPepesInfo</b-link>
-                    </b-form-group>
-                    <b-form-group label-cols="2" label-size="sm" label-align="right" label="" class="mx-0 mt-3 p-0">
+                    -->
+                    <b-form-group label-cols="3" label-size="sm" label-align="right" label="" class="mx-0 mt-3 p-0">
                       Enjoy. And hello, from the past.
                       <br />
                       (c) BokkyPooBah / Bok Consulting Pty Ltd 2022. The MIT Licence.
@@ -205,6 +237,13 @@
                 </b-card-body>
               </b-card>
             </div>
+
+            <b-card no-header no-body class="m-2 p-1">
+              <b-card-body class="m-0 p-0">
+                <div id="generatedSVGId" style="background-color: #648595; width: 240px; height: 240px;"></div>
+              </b-card-body>
+            </b-card>
+
             <!--
             <div v-if="!ownerView">
               <b-card-group deck class="m-1 ml-0 p-0">
