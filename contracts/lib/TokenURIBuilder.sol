@@ -3,7 +3,7 @@
 pragma solidity ^0.8.13;
 
 // import "@openzeppelin/contracts/utils/Strings.sol";
-import "./openzeppelin/utils/Strings.sol";
+import "../openzeppelin/utils/Strings.sol";
 import "./Base64.sol";
 import "./interfaces/ITokenURIBuilder.sol";
 

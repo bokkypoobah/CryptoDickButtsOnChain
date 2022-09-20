@@ -2,5 +2,5 @@
 
 pragma solidity ^0.8.13;
 
-error FailedToDecompress(uint errorCode);
-error InvalidDecompressionLength(uint expected, uint actual);
+error UnsupportedDrawInstruction(uint8 instructionType);
+error DoNotAddBlackToColorTable();
