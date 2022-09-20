@@ -97,6 +97,26 @@ describe("CryptoDickbuttsChained", function () {
       await data.printEvents("Deployed CryptoDickbuttsChained", cryptoDickbuttsChainedReceipt);
     }
 
+    // TODO: setData
+
+    const setup1 = [];
+    setup1.push(data.cryptoDickbuttsChained.setEncoder(data.gifEncoder.address));
+    setup1.push(data.cryptoDickbuttsChained.setRenderer(data.pixelRenderer.address));
+    setup1.push(data.cryptoDickbuttsChained.setSVGWrapper(data.svgWrapper.address));
+    setup1.push(data.cryptoDickbuttsChained.setTokenURIBuilder(data.tokenURIBuilder.address));
+    setup1.push(data.cryptoDickbuttsChained.setMetadata(data.cryptoDickbuttsMetadata.address));
+    setup1.push(data.cryptoDickbuttsChained.setBuilder(data.cryptoDickbuttsBuilder.address));
+    setup1.push(data.cryptoDickbuttsChained.setStrings(data.cryptoDickbuttsStrings.address));
+    setup1.push(data.cryptoDickbuttsChained.setRandom(data.cryptoDickbuttsRandom.address));
+    const mintATxs = await Promise.all(setup1);
+    if (DETAILS > 0) {
+      mintATxs.forEach( async function (a) {
+        await data.printEvents("cryptoDickbuttsChained.setX(x)", await a.wait());
+      });
+    }
+    // await data.printState("Setup Completed. UmswapFactory bytecode ~" + JSON.stringify(data.umswapFactory.deployTransaction.data.length/2, null, 2));
+
+
 
     // const ERC721Mock  = await ethers.getContractFactory("ERC721Mock");
     // const UmswapFactory  = await ethers.getContractFactory("UmswapFactory");
