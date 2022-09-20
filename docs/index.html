@@ -143,10 +143,10 @@
                   <b-link :href="tokenData && tokenData.external_url || ''" target="_blank">{{ tokenData && tokenData.external_url || '' }}</b-link>
                 </b-form-group>
                 <b-form-group label-cols="3" label-size="sm" label-align="right" label="image:" class="mx-0 my-1 p-0">
-                  <b-form-textarea size="sm" readonly :value="tokenData && tokenData.image || ''" rows="3" max-rows="10"></b-form-textarea>
+                  <b-form-textarea size="sm" readonly :value="tokenData && tokenData.image || ''" rows="3" max-rows="20"></b-form-textarea>
                 </b-form-group>
                 <b-form-group label-cols="3" label-size="sm" label-align="right" label="image_data:" class="mx-0 my-1 p-0">
-                  <b-form-textarea size="sm" readonly :value="tokenData && tokenData.image_data || ''" rows="3" max-rows="10"></b-form-textarea>
+                  <b-form-textarea size="sm" readonly :value="tokenData && tokenData.image_data || ''" rows="3" max-rows="40"></b-form-textarea>
                 </b-form-group>
               </b-card-body>
             </b-card>
@@ -159,11 +159,8 @@
       window.app = new Vue({
         el: '#app',
         data: {
-          tokenId: 1940, // null,
+          tokenId: null,
           tokenData: null,
-          metadata: null,
-          imageSVG: null,
-          generatedImageData: null,
           showInfo: false,
         },
         computed: {
@@ -191,19 +188,14 @@
               let tokenData = null;
               if (this.tokenId != null) {
                 const tokenURI = await cdboc.tokenURI(this.tokenId);
-                // this.generatedImageData = tokenURI;
-                // console.log(JSON.stringify(tokenURI));
                 let tokenURIDataBase64 = tokenURI.replace("data:application/json;base64,", "");
-                // console.log(tokenURIDataBase64);
                 let tokenMetadata = JSON.parse(atob(tokenURIDataBase64));
                 console.log(JSON.stringify(tokenMetadata, null, 2));
-                // this.metadata = tokenMetadata;
                 let image = tokenMetadata.image_data;
                 console.log(image);
                 let svgDataBase64 = image.replace("data:image/svg+xml;base64,", "");
                 console.log(svgDataBase64);
                 let svg = atob(svgDataBase64);
-                // document.getElementById('generatedSVGId').innerHTML = svg;
                 tokenData = { ...tokenMetadata, svg, imageData: image };
               }
               this.tokenData = tokenData;
