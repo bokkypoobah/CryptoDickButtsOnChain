@@ -52,7 +52,7 @@
           <b-card-body class="m-0 p-1">
             <div class="d-flex flex-wrap m-0 p-0">
               <div class="mt-1 pr-1">
-                <b-form-input type="text" size="sm" v-model.trim="tokenId" debounce="600" placeholder="🔍 tokenId"></b-form-input>
+                <b-form-input type="text" size="sm" v-model.trim="tokenId" debounce="600" placeholder="tokenId, e.g., 1940"></b-form-input>
               </div>
               <div class="mt-1">
                 <b-button :disabled="sync.section != null" size="sm" @click="retrieveOnChainImage" variant="primary" style="min-width: 80px;" v-b-popover.hover.top="'Retrieve on-chain image via the web3 connection'"><b-icon-cloud-download shift-v="+1" font-scale="0.9"></b-icon-cloud-download> Retrieve On-Chain Image</b-button>
