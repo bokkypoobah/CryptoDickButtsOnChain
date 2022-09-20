@@ -43,7 +43,8 @@
 
 pragma solidity ^0.8.13;
 
-import "@divergencetech/ethier/contracts/random/PRNG.sol";
+// import "@divergencetech/ethier/contracts/random/PRNG.sol";
+import "./divergencetech/ethier/random/PRNG.sol";
 
 import "./lib/interfaces/IRandom.sol";
 import "./lib/interfaces/IBuilder.sol";

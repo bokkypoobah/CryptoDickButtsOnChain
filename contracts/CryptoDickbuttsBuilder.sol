@@ -43,7 +43,8 @@
 
 pragma solidity ^0.8.13;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
+// import "@openzeppelin/contracts/access/Ownable.sol";
+import "./openzeppelin/access/Ownable.sol";
 
 import "./lib/SSTORE2.sol";
 import "./lib/graphics/Animation.sol";
