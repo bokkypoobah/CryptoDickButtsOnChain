@@ -176,96 +176,127 @@ class Data {
     this.addContract(cryptoDickbuttsChained, "CryptoDickbuttsChained");
   }
 
-
-  async setUmswapFactory(umswapFactory) {
-    this.umswapFactory = umswapFactory;
-    this.addContract(umswapFactory, "UmswapFactory");
-  }
-  async setUmswap(umswap) {
-    this.umswap = umswap;
-    this.addContract(umswap, "Umswap");
-  }
+  //
+  // async setUmswapFactory(umswapFactory) {
+  //   this.umswapFactory = umswapFactory;
+  //   this.addContract(umswapFactory, "UmswapFactory");
+  // }
+  // async setUmswap(umswap) {
+  //   this.umswap = umswap;
+  //   this.addContract(umswap, "Umswap");
+  // }
 
   async printState(prefix) {
     console.log("\n        --- " + prefix + " ---");
 
-    let erc721TotalSupply = 0;
-    const owners = {};
-    if (this.erc721Mock != null) {
-      erc721TotalSupply = await this.erc721Mock.totalSupply();
-      for (let i = 0; i < erc721TotalSupply; i++) {
-        const tokenId = await this.erc721Mock.tokenByIndex(i);
-        const ownerOf = await this.erc721Mock.ownerOf(tokenId);
-        if (!owners[ownerOf]) {
-          owners[ownerOf] = [];
-        }
-        owners[ownerOf].push(parseInt(tokenId));
-      }
-    }
-    let umswapSymbol = "??????";
-    let umswapTotalSupply = 0;
-    let umswapDecimals = null;
-    if (this.umswap != null) {
-      umswapSymbol = await this.umswap.symbol();
-      umswapTotalSupply = ethers.utils.formatEther(await this.umswap.totalSupply());
-      umswapDecimals = await this.umswap.decimals();
-    }
-    let umswapTitle = umswapSymbol.toString().substring(0, 10) + " (" + umswapDecimals + ") " + umswapTotalSupply;
-    if (umswapTitle.length < 23) {
-      umswapTitle = " ".repeat(23 - umswapTitle.length) + umswapTitle;
-    }
-
-    console.log("          Account                                   ETH " + umswapTitle + " " + this.padRight(await this.erc721Mock.symbol() + " (" + erc721TotalSupply + ")", 25));
-    console.log("          -------------------- ------------------------ ----------------------- ---------------------------------------------");
-    const checkAccounts = [this.deployer, this.user0, this.user1, this.user2, this.integrator];
-    if (this.umswapFactory != null) {
-      checkAccounts.push(this.umswapFactory.address);
-    }
-    if (this.umswap != null) {
-      checkAccounts.push(this.umswap.address);
-    }
-    for (let i = 0; i < checkAccounts.length; i++) {
-      const ownerData = owners[checkAccounts[i]] || [];
-      const erc721Balance = await ethers.provider.getBalance(checkAccounts[i]);
-      const umswapBalance = this.umswap != null ? await this.umswap.balanceOf(checkAccounts[i]) : 0;
-      console.log("          " + this.padRight(this.getShortAccountName(checkAccounts[i]), 20) + " " + this.padLeft(ethers.utils.formatEther(erc721Balance), 24) + " " + this.padLeft(ethers.utils.formatEther(umswapBalance), 23) + " " + this.padRight(JSON.stringify(ownerData), 25));
-    }
     console.log();
+    console.log("        CryptoDickbuttsChained: " + this.getShortAccountName(this.cryptoDickbuttsChained.address));
+    const gifEncoder = await this.cryptoDickbuttsChained.encoder();
+    console.log("        CryptoDickbuttsChained.encoder: " + this.getShortAccountName(gifEncoder) + " vs " + this.getShortAccountName(this.gifEncoder.address));
+    const renderer = await this.cryptoDickbuttsChained.renderer();
+    console.log("        CryptoDickbuttsChained.renderer: " + this.getShortAccountName(renderer) + " vs " + this.getShortAccountName(this.pixelRenderer.address));
+    const svgWrapper = await this.cryptoDickbuttsChained.svgWrapper();
+    console.log("        CryptoDickbuttsChained.svgWrapper: " + this.getShortAccountName(svgWrapper) + " vs " + this.getShortAccountName(this.svgWrapper.address));
+    const uriBuilder = await this.cryptoDickbuttsChained.uriBuilder();
+    console.log("        CryptoDickbuttsChained.uriBuilder: " + this.getShortAccountName(uriBuilder) + " vs " + this.getShortAccountName(this.tokenURIBuilder.address));
+    const metadata = await this.cryptoDickbuttsChained.metadata();
+    console.log("        CryptoDickbuttsChained.metadata: " + this.getShortAccountName(metadata) + " vs " + this.getShortAccountName(this.cryptoDickbuttsMetadata.address));
+    const builder = await this.cryptoDickbuttsChained.builder();
+    console.log("        CryptoDickbuttsChained.builder: " + this.getShortAccountName(builder) + " vs " + this.getShortAccountName(this.cryptoDickbuttsBuilder.address));
+    const strings = await this.cryptoDickbuttsChained.strings();
+    console.log("        CryptoDickbuttsChained.strings: " + this.getShortAccountName(strings) + " vs " + this.getShortAccountName(this.cryptoDickbuttsStrings.address));
+    const random = await this.cryptoDickbuttsChained.random();
+    console.log("        CryptoDickbuttsChained.random: " + this.getShortAccountName(random) + " vs " + this.getShortAccountName(this.cryptoDickbuttsRandom.address));
+    // this.gifEncoder = null;
+    // this.pixelRenderer = null;
+    // this.svgWrapper = null;
+    // this.tokenURIBuilder = null;
+    // this.cryptoDickbuttsMetadata = null;
+    // this.cryptoDickbuttsBuilder = null;
+    // this.cryptoDickbuttsStrings = null;
+    // this.cryptoDickbuttsRandom = null;
+    // this.cryptoDickbuttsChained = null;
 
-    if (this.umswapFactory != null) {
-      const getUmswapsLength = await this.umswapFactory.getUmswapsLength();
-      let indices = generateRange(0, getUmswapsLength - 1, 1);
-      const getUmswaps = await this.umswapFactory.getUmswaps(this.user0, indices);
-      // console.log("getUmswaps: " + JSON.stringify(getUmswaps, null, 2));
-      console.log("            # Address              Creator              Symbol   Name                           ERC-721 Collection       TotalSupply   In  Out  Rts  Rt# Aprv TokenIds                      ");
-      console.log("          --- -------------------- -------------------- -------- ------------------------------ -------------------- --------------- ---- ---- ---- ---- ---- ------------------------------");
-      for (let i = 0; i < getUmswaps[0].length; i++) {
-        const stats = getUmswaps[7][i];
-        // console.log("stats: " + JSON.stringify(stats, null, 2));
-        // console.log("stats[0]: " + stats[0]);
-        const ratingsLength = stats[4];
-        console.log("          " + this.padLeft(i, 3) + " " + this.padRight(this.getShortAccountName(getUmswaps[0][i]), 20) + " " +
-          this.padRight(this.getShortAccountName(getUmswaps[6][i]), 20) + " " + getUmswaps[1][i] + " " +
-          this.padRight(getUmswaps[2][i], 30) + " " +
-          this.padRight(this.getShortAccountName(getUmswaps[3][i]), 20) + " " +
-          this.padLeft(ethers.utils.formatEther(stats[3]), 15) + " " +
-          this.padLeft(stats[0], 4) + " " +
-          this.padLeft(stats[1], 4) + " " +
-          this.padLeft(stats[2], 4) + " " +
-          this.padLeft(ratingsLength, 4) + " " +
-          this.padLeft(stats[5], 4) + " " +
-          this.padRight(JSON.stringify(getUmswaps[4][i].map((x) => { return parseInt(x.toString()); })) + "/" + JSON.stringify(getUmswaps[5][i].map((x) => { return parseInt(x.toString()); })), 30)
-        );
-        if (ratingsLength > 0 && i == 0 && this.umswap != null) {
-          console.log();
-          const indices = generateRange(0, ratingsLength - 1, 1);
-          const ratings = await this.umswap.getRatings(indices);
-          for (let j = 0; j < ratings.length; j++) {
-            console.log("          " + this.getShortAccountName(ratings[j][0], 20) + " rated " + ratings[j][1]);
+
+    if (false) {
+      let erc721TotalSupply = 0;
+      const owners = {};
+      if (this.erc721Mock != null) {
+        erc721TotalSupply = await this.erc721Mock.totalSupply();
+        for (let i = 0; i < erc721TotalSupply; i++) {
+          const tokenId = await this.erc721Mock.tokenByIndex(i);
+          const ownerOf = await this.erc721Mock.ownerOf(tokenId);
+          if (!owners[ownerOf]) {
+            owners[ownerOf] = [];
           }
+          owners[ownerOf].push(parseInt(tokenId));
         }
+      }
+      let umswapSymbol = "??????";
+      let umswapTotalSupply = 0;
+      let umswapDecimals = null;
+      if (this.umswap != null) {
+        umswapSymbol = await this.umswap.symbol();
+        umswapTotalSupply = ethers.utils.formatEther(await this.umswap.totalSupply());
+        umswapDecimals = await this.umswap.decimals();
+      }
+      let umswapTitle = umswapSymbol.toString().substring(0, 10) + " (" + umswapDecimals + ") " + umswapTotalSupply;
+      if (umswapTitle.length < 23) {
+        umswapTitle = " ".repeat(23 - umswapTitle.length) + umswapTitle;
+      }
+
+      console.log("          Account                                   ETH " + umswapTitle + " " + this.padRight(await this.erc721Mock.symbol() + " (" + erc721TotalSupply + ")", 25));
+      console.log("          -------------------- ------------------------ ----------------------- ---------------------------------------------");
+      const checkAccounts = [this.deployer, this.user0, this.user1, this.user2, this.integrator];
+      if (this.umswapFactory != null) {
+        checkAccounts.push(this.umswapFactory.address);
+      }
+      if (this.umswap != null) {
+        checkAccounts.push(this.umswap.address);
+      }
+      for (let i = 0; i < checkAccounts.length; i++) {
+        const ownerData = owners[checkAccounts[i]] || [];
+        const erc721Balance = await ethers.provider.getBalance(checkAccounts[i]);
+        const umswapBalance = this.umswap != null ? await this.umswap.balanceOf(checkAccounts[i]) : 0;
+        console.log("          " + this.padRight(this.getShortAccountName(checkAccounts[i]), 20) + " " + this.padLeft(ethers.utils.formatEther(erc721Balance), 24) + " " + this.padLeft(ethers.utils.formatEther(umswapBalance), 23) + " " + this.padRight(JSON.stringify(ownerData), 25));
       }
       console.log();
+
+      if (this.umswapFactory != null) {
+        const getUmswapsLength = await this.umswapFactory.getUmswapsLength();
+        let indices = generateRange(0, getUmswapsLength - 1, 1);
+        const getUmswaps = await this.umswapFactory.getUmswaps(this.user0, indices);
+        // console.log("getUmswaps: " + JSON.stringify(getUmswaps, null, 2));
+        console.log("            # Address              Creator              Symbol   Name                           ERC-721 Collection       TotalSupply   In  Out  Rts  Rt# Aprv TokenIds                      ");
+        console.log("          --- -------------------- -------------------- -------- ------------------------------ -------------------- --------------- ---- ---- ---- ---- ---- ------------------------------");
+        for (let i = 0; i < getUmswaps[0].length; i++) {
+          const stats = getUmswaps[7][i];
+          // console.log("stats: " + JSON.stringify(stats, null, 2));
+          // console.log("stats[0]: " + stats[0]);
+          const ratingsLength = stats[4];
+          console.log("          " + this.padLeft(i, 3) + " " + this.padRight(this.getShortAccountName(getUmswaps[0][i]), 20) + " " +
+            this.padRight(this.getShortAccountName(getUmswaps[6][i]), 20) + " " + getUmswaps[1][i] + " " +
+            this.padRight(getUmswaps[2][i], 30) + " " +
+            this.padRight(this.getShortAccountName(getUmswaps[3][i]), 20) + " " +
+            this.padLeft(ethers.utils.formatEther(stats[3]), 15) + " " +
+            this.padLeft(stats[0], 4) + " " +
+            this.padLeft(stats[1], 4) + " " +
+            this.padLeft(stats[2], 4) + " " +
+            this.padLeft(ratingsLength, 4) + " " +
+            this.padLeft(stats[5], 4) + " " +
+            this.padRight(JSON.stringify(getUmswaps[4][i].map((x) => { return parseInt(x.toString()); })) + "/" + JSON.stringify(getUmswaps[5][i].map((x) => { return parseInt(x.toString()); })), 30)
+          );
+          if (ratingsLength > 0 && i == 0 && this.umswap != null) {
+            console.log();
+            const indices = generateRange(0, ratingsLength - 1, 1);
+            const ratings = await this.umswap.getRatings(indices);
+            for (let j = 0; j < ratings.length; j++) {
+              console.log("          " + this.getShortAccountName(ratings[j][0], 20) + " rated " + ratings[j][1]);
+            }
+          }
+        }
+        console.log();
+      }
     }
 
     if (false) {

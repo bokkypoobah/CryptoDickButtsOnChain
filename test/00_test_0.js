@@ -125,47 +125,8 @@ describe("CryptoDickbuttsChained", function () {
         await data.printEvents("cryptoDickbuttsChained.setX(x)", await a.wait());
       });
     }
-    // await data.printState("Setup Completed. UmswapFactory bytecode ~" + JSON.stringify(data.umswapFactory.deployTransaction.data.length/2, null, 2));
+    await data.printState("Setup Completed");
 
-
-
-    // const ERC721Mock  = await ethers.getContractFactory("ERC721Mock");
-    // const UmswapFactory  = await ethers.getContractFactory("UmswapFactory");
-    //
-    // console.log("        --- Setup Accounts, NFT and Umswap Contracts - Assuming gasPrice: " + ethers.utils.formatUnits(data.gasPrice, "gwei") + " gwei, ethUsd: " + ethers.utils.formatUnits(data.ethUsd, 18) + " ---");
-    //
-    // const erc721Mock = await ERC721Mock.deploy("ERC721Mock", "ERC721MOCK");
-    // await erc721Mock.deployed();
-    // await data.setERC721Mock(erc721Mock);
-    // const erc721MockReceipt = await data.erc721Mock.deployTransaction.wait();
-    // if (DETAILS > 0) {
-    //   await data.printEvents("Deployed ERC721Mock", erc721MockReceipt);
-    // }
-    // console.log("        erc721Mock deployed");
-    //
-    // const umswapFactory = await UmswapFactory.deploy();
-    // await umswapFactory.deployed();
-    // await data.setUmswapFactory(umswapFactory);
-    // const umswapFactoryReceipt = await data.umswapFactory.deployTransaction.wait();
-    // if (DETAILS > 0) {
-    //   await data.printEvents("Deployed UmswapFactory", umswapFactoryReceipt);
-    // }
-    // console.log("        UmswapFactory deployed");
-    //
-    // const setup1 = [];
-    // setup1.push(data.erc721Mock.mint(data.user0, 111));
-    // setup1.push(data.erc721Mock.mint(data.user0, 222));
-    // setup1.push(data.erc721Mock.mint(data.user0, 333));
-    // setup1.push(data.erc721Mock.mint(data.user1, 444));
-    // setup1.push(data.erc721Mock.mint(data.user1, 555));
-    // setup1.push(data.erc721Mock.mint(data.user1, 666));
-    // const mintATxs = await Promise.all(setup1);
-    // if (DETAILS > 0) {
-    //   mintATxs.forEach( async function (a) {
-    //     await data.printEvents("Minted ERC721Mock", await a.wait());
-    //   });
-    // }
-    // await data.printState("Setup Completed. UmswapFactory bytecode ~" + JSON.stringify(data.umswapFactory.deployTransaction.data.length/2, null, 2));
     console.log("      beforeEach - end");
     console.log();
   });
@@ -174,7 +135,19 @@ describe("CryptoDickbuttsChained", function () {
   it("00. Test 00", async function () {
     console.log("      00. Test 00 - Happy Path - Specified Set");
 
-    // const tokenIds = [111, 333, 555];
+    const metadata = await data.cryptoDickbuttsMetadata.getMetadata(1000);
+    console.log(metadata);
+
+    const tokenURI = await data.cryptoDickbuttsChained.tokenURI(1000, { gasLimit: 75000000 });
+    console.log(tokenURI);
+
+    // const tokenIds = [1000];
+    // for (const tokenId of tokenIds) {
+    //
+    //   const tokenURI = await data.cryptoDickbuttsChained.tokenURI(1000);
+    //   console.log(tokenURI);
+    // }
+
     // const newUmswapTx = await data.umswapFactory.newUmswap(data.erc721Mock.address, "Odd TokenIds: - test", tokenIds);
     // await data.printEvents("deployer->factory.newUmswap(erc721Mock, " + JSON.stringify(tokenIds) + ")", await newUmswapTx.wait());
     //
