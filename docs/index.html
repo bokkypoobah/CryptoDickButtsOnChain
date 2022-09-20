@@ -130,19 +130,20 @@
                 </div>
               </div>
             </div>
-            <b-card-text>
-              <p>generatedImageData</p>
+            <b-card-text class="mt-2">
+              <!-- <p>generatedImageData</p>
               <div class="bg-light text-light">
                 <pre>
-                  <code class="json" v-if="generatedImageData !== null" style="display: inline-block;white-space: normal;max-width:100%; word-break:break-all; word-wrap:break-word;">
-{{ JSON.stringify(generatedImageData, null, 4) }}
+                  <code class="json" v-if="metadata !== null" style="display: inline-block;white-space: normal;max-width:100%; word-break:break-all; word-wrap:break-word;">
+{{ JSON.stringify(metadata, null, 4) }}
                   </code>
                 </pre>
-              </div>
+              </div> -->
+              <div id="generatedSVGId" style="background-color: #648595; width: 240px; height: 240px;"></div>
             </b-card-text>
             <!-- <b-card-text v-if="generatedImageData != null"> -->
               <!-- <b-img width="220%" :src="punkImageSvg" /> -->
-              <!-- <div id="generatedImageDataId" style="background-color: #648595; width: 240px; height: 240px;"></div> -->
+              <!-- <div id="generatedSVGId" style="background-color: #648595; width: 240px; height: 240px;"></div> -->
             <!-- </b-card-text> -->
 
             <b-card v-if="false && layer != null" no-header no-body class="m-0 mt-1 p-1 border-1">
@@ -318,6 +319,8 @@
         el: '#app',
         data: {
           tokenId: 1940, // TODO: null
+          metadata: null,
+          imageSVG: null,
           generatedImageData: null,
           info: INFO[0],
           showInfo: false,
@@ -628,9 +631,17 @@
               const cdboc = new ethers.Contract(CDBOCADDRESS, CDBOCABI, provider);
               const tokenURI = await cdboc.tokenURI(this.tokenId);
               this.generatedImageData = tokenURI;
-              console.log(JSON.stringify(tokenURI));
-              let svg = tokenURI.replace("data:application/json;base64,", "");
-              // document.getElementById('generatedImageDataId').innerHTML = svg;
+              // console.log(JSON.stringify(tokenURI));
+              let data1 = tokenURI.replace("data:application/json;base64,", "");
+              console.log(data1);
+              let data2 = JSON.parse(atob(data1));
+              console.log(JSON.stringify(data2, null, 2));
+              this.metadata = data2;
+              let image = data2.image_data;
+              console.log(image);
+              let svg = image.replace("data:image/svg+xml;base64,", "");
+              console.log(svg);
+              document.getElementById('generatedSVGId').innerHTML = atob(svg);
               // alert("Hello");
               // const erc721Helper = new ethers.Contract(ERC721HELPERADDRESS, ERC721HELPERABI, provider);
               // const owners = {};
