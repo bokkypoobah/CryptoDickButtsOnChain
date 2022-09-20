@@ -1,7 +1,9 @@
 {
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^2.0.0",
+    "@nomiclabs/hardhat-ethers": "^2.1.1",
     "@openzeppelin/test-helpers": "^0.5.16",
+    "ethers": "^5.7.1",
     "hardhat": "^2.11.2"
   }
 }
