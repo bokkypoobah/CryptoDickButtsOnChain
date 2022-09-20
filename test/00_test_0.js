@@ -6,7 +6,7 @@ const util = require('util');
 
 let data;
 
-describe("umswap", function () {
+describe("CryptoDickbuttsChained", function () {
   const DETAILS = 1;
 
   beforeEach(async function () {
@@ -135,6 +135,8 @@ describe("umswap", function () {
     //   });
     // }
     // await data.printState("Setup Completed. UmswapFactory bytecode ~" + JSON.stringify(data.umswapFactory.deployTransaction.data.length/2, null, 2));
+    console.log("      beforeEach - end");
+    console.log();
   });
 
 
