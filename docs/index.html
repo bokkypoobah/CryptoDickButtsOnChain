@@ -53,18 +53,24 @@
           <b-card-body class="m-0 p-1">
             <div class="d-flex flex-wrap m-0 p-0">
               <div class="mt-1 pr-1">
-                <b-form-input type="text" size="sm" v-model.trim="searchAccount" debounce="600" placeholder="🔍 ens1, addy1, ..."></b-form-input>
+                <b-form-input type="text" size="sm" v-model.trim="tokenId" debounce="600" placeholder="🔍 tokenId"></b-form-input>
               </div>
               <div class="mt-1">
+                <b-button :disabled="sync.section != null" size="sm" @click="retrieveOnChainImage" variant="primary" style="min-width: 80px;" v-b-popover.hover.top="'Retrieve on-chain image via the web3 connection'"><b-icon-cloud-download shift-v="+1" font-scale="0.9"></b-icon-cloud-download> Retrieve On-Chain Image</b-button>
+              </div>
+              <div v-if="false" class="mt-1 pr-1">
+                <b-form-input type="text" size="sm" v-model.trim="searchAccount" debounce="600" placeholder="🔍 ens1, addy1, ..."></b-form-input>
+              </div>
+              <div v-if="false" class="mt-1">
                 <b-form-select size="sm" v-model="layer" :options="layerOptions" v-b-popover.hover.top="'Filter by layer'"></b-form-select>
               </div>
               <div class="mt-1 flex-grow-1">
               </div>
-              <div class="mt-1 pr-1">
+              <div v-if="false" class="mt-1 pr-1">
                 <b-button :disabled="sync.section != null" size="sm" @click="retrievePrices" variant="primary" style="min-width: 80px;" v-b-popover.hover.top="'Retrieve asking prices via the @reservoir0x API'"><b-icon-cloud-download shift-v="+1" font-scale="0.9"></b-icon-cloud-download> Prices</b-button>
               </div>
-              <div class="mt-1">
-                <b-button :disabled="sync.section != null" size="sm" @click="retrieveOwners" variant="primary" style="min-width: 80px;" v-b-popover.hover.top="'Retrieve ownership and ENS via the web3 connection'"><b-icon-cloud-download shift-v="+1" font-scale="0.9"></b-icon-cloud-download> Owners</b-button>
+              <div v-if="false" class="mt-1">
+                <b-button :disabled="sync.section != null" size="sm" @click="retrieveOnChainImage" variant="primary" style="min-width: 80px;" v-b-popover.hover.top="'Retrieve ownership and ENS via the web3 connection'"><b-icon-cloud-download shift-v="+1" font-scale="0.9"></b-icon-cloud-download> Owners</b-button>
               </div>
               <div class="mt-1 flex-grow-1">
               </div>
@@ -77,12 +83,12 @@
               </div>
               <div class="mt-1 flex-grow-1">
               </div>
-              <div class="mt-1">
+              <div v-if="false" class="mt-1">
                 <div v-if="!ownerView">
                   <font size="-2" v-b-popover.hover.top="'# owners'">{{ filteredSortedTokensByOwners.length }}</font>
                 </div>
               </div>
-              <div class="mt-1 pr-1">
+              <div v-if="false" class="mt-1 pr-1">
                 <b-button size="sm" :pressed.sync="ownerView" variant="link" v-b-popover.hover.top="'By owners or tokens'"><span v-if="ownerView"><b-icon-people-fill shift-v="+1" font-scale="1.0"></b-icon-people-fill></span><span v-else><b-icon-people shift-v="+1" font-scale="1.0"></b-icon-people></span></b-button>
               </div>
               <div class="mt-1">
@@ -91,7 +97,7 @@
               <div class="mt-1 flex-grow-1">
               </div>
 
-              <div class="mt-1 pr-1">
+              <div v-if="false" class="mt-1 pr-1">
                 <div v-if="ownerView">
                   <b-form-select size="sm" v-model="ownerSortOption" :options="ownerSortOptions" v-b-popover.hover.top="'Yeah. Sort'"></b-form-select>
                 </div>
@@ -99,7 +105,7 @@
                   <b-form-select size="sm" v-model="sortOption" :options="sortOptions" v-b-popover.hover.top="'Yeah. Sort'"></b-form-select>
                 </div>
               </div>
-              <div class="mt-1 pr-1">
+              <div v-if="false" class="mt-1 pr-1">
                 <div v-if="ownerView">
                   <font size="-2" v-b-popover.hover.top="'# owners'">{{ filteredSortedTokensByOwners.length }}</font>
                 </div>
@@ -107,7 +113,7 @@
                   <font size="-2" v-b-popover.hover.top="'# tokens'">{{ filteredSortedCollectionTokens.length }}</font>
                 </div>
               </div>
-              <div class="mt-1 pr-1">
+              <div v-if="false" class="mt-1 pr-1">
                 <div v-if="ownerView">
                   <b-pagination size="sm" v-model="ownerCurrentPage" :total-rows="filteredSortedTokensByOwners.length" :per-page="ownerPageSize" style="height: 0;"></b-pagination>
                 </div>
@@ -115,7 +121,7 @@
                   <b-pagination size="sm" v-model="currentPage" :total-rows="filteredSortedCollectionTokens.length" :per-page="pageSize" style="height: 0;"></b-pagination>
                 </div>
               </div>
-              <div class="mt-1 pl-1">
+              <div v-if="false" class="mt-1 pl-1">
                 <div v-if="ownerView">
                   <b-form-select size="sm" v-model="ownerPageSize" :options="pageSizes" v-b-popover.hover.top="'Owner Page size'"></b-form-select>
                 </div>
@@ -124,7 +130,15 @@
                 </div>
               </div>
             </div>
-            <b-card v-if="layer != null" no-header no-body class="m-0 mt-1 p-1 border-1">
+            <b-card-text>
+              generatedImageData: {{ generatedImageData }}
+            </b-card-text>
+            <!-- <b-card-text v-if="generatedImageData != null"> -->
+              <!-- <b-img width="220%" :src="punkImageSvg" /> -->
+              <!-- <div id="generatedImageDataId" style="background-color: #648595; width: 240px; height: 240px;"></div> -->
+            <!-- </b-card-text> -->
+
+            <b-card v-if="false && layer != null" no-header no-body class="m-0 mt-1 p-1 border-1">
               <b-card-group deck class="m-1 ml-0 p-0">
                 <div v-for="trait in traitOptions">
                   <b-card body-class="p-0" header-class="p-1" img-top class="m-1 p-0 border-0" style="max-width: 7rem;">
@@ -151,6 +165,7 @@
                 </div>
               </b-card-group>
             </b-card>
+
             <!--
             <div v-if="showInfo">
               <b-card no-header no-body class="m-2 p-1">
@@ -295,6 +310,8 @@
       window.app = new Vue({
         el: '#app',
         data: {
+          tokenId: 1940, // TODO: null
+          generatedImageData: null,
           info: INFO[0],
           showInfo: false,
           ownerView: false,
@@ -583,8 +600,8 @@
             }
             return address == null ? null : address.substring(0, length);
           },
-          async retrieveOwners() {
-            console.log("retrieveOwners");
+          async retrieveOnChainImage() {
+            console.log("retrieveOnChainImage");
             let connected = true;
             if (!window.ethereum) {
               alert("Please use the https://metamask.io addon with Firefox, Chromium, Opera or Chrome, or any other other web3 browser, for web3 data retrieval. And refresh!");
@@ -601,51 +618,58 @@
             if (connected) {
               const provider = new ethers.providers.Web3Provider(window.ethereum);
               const network = await provider.getNetwork();
-              const erc721Helper = new ethers.Contract(ERC721HELPERADDRESS, ERC721HELPERABI, provider);
-              const owners = {};
-              const NFTOWNERBATCHSIZE = 200; // 500 OK
-              this.sync.completed = 0;
-              this.sync.total = this.totalSupply;
-              this.sync.section = "Owners";
-              const generateRange = (start, stop, step) => Array.from({ length: (stop - start) / step + 1}, (_, i) => start + (i * step));
-              for (let i = 0; i < this.totalSupply; i += NFTOWNERBATCHSIZE) {
-                const to = (i + NFTOWNERBATCHSIZE > this.totalSupply) ? this.totalSupply : i + NFTOWNERBATCHSIZE;
-                const tokenIds = generateRange(i, to, 1);
-                const ownersResult = await erc721Helper.ownersByTokenIds(this.contractAddress, tokenIds);
-                for (let j = 0; j < ownersResult[0].length; j++) {
-                  owners[tokenIds[j]] = ownersResult[1][j];
-                }
-                this.sync.completed = Object.keys(owners).length;
-              }
-              this.owners = owners;
-              localStorage.setItem('popOwners', JSON.stringify(owners));
-              this.sync.section = "ENS";
-              const ensMap = {};
-              for (let i in owners) {
-                const owner = owners[i];
-                if (!ensMap[owner]) {
-                  ensMap[owner] = owner;
-                }
-              }
-              let addresses = Object.keys(ensMap);
-              this.sync.total = addresses.length;
-              this.sync.completed = 0;
-              const ensReverseRecordsContract = new ethers.Contract(ENSREVERSERECORDSADDRESS, ENSREVERSERECORDSABI, provider);
-              const ENSOWNERBATCHSIZE = 200; // 500 fails occassionally
-              for (let i = 0; i < addresses.length; i += ENSOWNERBATCHSIZE) {
-                const batch = addresses.slice(i, parseInt(i) + ENSOWNERBATCHSIZE);
-                const allnames = await ensReverseRecordsContract.getNames(batch);
-                for (let j = 0; j < batch.length; j++) {
-                  const address = batch[j];
-                  const name = allnames[j];
-                  ensMap[address] = name != null && name.length > 0 ? name : address;
-              //     // const normalized = normalize(address);
-                }
-                this.sync.completed = parseInt(this.sync.completed) + batch.length;
-              }
-              this.ensMap = ensMap;
-              localStorage.setItem('popENSMap', JSON.stringify(ensMap));
-              this.sync.section = null;
+              const cdboc = new ethers.Contract(CDBOCADDRESS, CDBOCABI, provider);
+              const tokenURI = await cdboc.tokenURI(this.tokenId);
+              this.generatedImageData = tokenURI;
+              console.log(JSON.stringify(tokenURI));
+              let svg = tokenURI.replace("data:application/json;base64,", "");
+              // document.getElementById('generatedImageDataId').innerHTML = svg;
+              // alert("Hello");
+              // const erc721Helper = new ethers.Contract(ERC721HELPERADDRESS, ERC721HELPERABI, provider);
+              // const owners = {};
+              // const NFTOWNERBATCHSIZE = 200; // 500 OK
+              // this.sync.completed = 0;
+              // this.sync.total = this.totalSupply;
+              // this.sync.section = "Owners";
+              // const generateRange = (start, stop, step) => Array.from({ length: (stop - start) / step + 1}, (_, i) => start + (i * step));
+              // for (let i = 0; i < this.totalSupply; i += NFTOWNERBATCHSIZE) {
+              //   const to = (i + NFTOWNERBATCHSIZE > this.totalSupply) ? this.totalSupply : i + NFTOWNERBATCHSIZE;
+              //   const tokenIds = generateRange(i, to, 1);
+              //   const ownersResult = await erc721Helper.ownersByTokenIds(this.contractAddress, tokenIds);
+              //   for (let j = 0; j < ownersResult[0].length; j++) {
+              //     owners[tokenIds[j]] = ownersResult[1][j];
+              //   }
+              //   this.sync.completed = Object.keys(owners).length;
+              // }
+              // this.owners = owners;
+              // localStorage.setItem('popOwners', JSON.stringify(owners));
+              // this.sync.section = "ENS";
+              // const ensMap = {};
+              // for (let i in owners) {
+              //   const owner = owners[i];
+              //   if (!ensMap[owner]) {
+              //     ensMap[owner] = owner;
+              //   }
+              // }
+              // let addresses = Object.keys(ensMap);
+              // this.sync.total = addresses.length;
+              // this.sync.completed = 0;
+              // const ensReverseRecordsContract = new ethers.Contract(ENSREVERSERECORDSADDRESS, ENSREVERSERECORDSABI, provider);
+              // const ENSOWNERBATCHSIZE = 200; // 500 fails occassionally
+              // for (let i = 0; i < addresses.length; i += ENSOWNERBATCHSIZE) {
+              //   const batch = addresses.slice(i, parseInt(i) + ENSOWNERBATCHSIZE);
+              //   const allnames = await ensReverseRecordsContract.getNames(batch);
+              //   for (let j = 0; j < batch.length; j++) {
+              //     const address = batch[j];
+              //     const name = allnames[j];
+              //     ensMap[address] = name != null && name.length > 0 ? name : address;
+              // //     // const normalized = normalize(address);
+              //   }
+              //   this.sync.completed = parseInt(this.sync.completed) + batch.length;
+              // }
+              // this.ensMap = ensMap;
+              // localStorage.setItem('popENSMap', JSON.stringify(ensMap));
+              // this.sync.section = null;
             }
           },
         },
