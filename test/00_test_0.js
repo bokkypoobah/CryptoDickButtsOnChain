@@ -12,22 +12,94 @@ describe("umswap", function () {
   beforeEach(async function () {
     console.log();
     console.log("      beforeEach");
-    const GIFEncoder  = await ethers.getContractFactory("GIFEncoder");
-    const PixelRenderer  = await ethers.getContractFactory("PixelRenderer");
-    const SVGWrapper  = await ethers.getContractFactory("SVGWrapper");
-    const TokenURIBuilder  = await ethers.getContractFactory("TokenURIBuilder");
-    const CryptoDickbuttsMetadata  = await ethers.getContractFactory("CryptoDickbuttsMetadata");
-    const CryptoDickbuttsBuilder  = await ethers.getContractFactory("CryptoDickbuttsBuilder");
-    const CryptoDickbuttsStrings  = await ethers.getContractFactory("CryptoDickbuttsStrings");
-    const CryptoDickbuttsRandom  = await ethers.getContractFactory("CryptoDickbuttsRandom");
-    const CryptoDickbuttsChained  = await ethers.getContractFactory("CryptoDickbuttsChained");
+    data = new Data();
+    await data.init();
 
+    const GIFEncoder = await ethers.getContractFactory("GIFEncoder");
+    const PixelRenderer = await ethers.getContractFactory("PixelRenderer");
+    const SVGWrapper = await ethers.getContractFactory("SVGWrapper");
+    const TokenURIBuilder = await ethers.getContractFactory("TokenURIBuilder");
+    const CryptoDickbuttsMetadata = await ethers.getContractFactory("CryptoDickbuttsMetadata");
+    const CryptoDickbuttsBuilder = await ethers.getContractFactory("CryptoDickbuttsBuilder");
+    const CryptoDickbuttsStrings = await ethers.getContractFactory("CryptoDickbuttsStrings");
+    const CryptoDickbuttsRandom = await ethers.getContractFactory("CryptoDickbuttsRandom");
+    const CryptoDickbuttsChained = await ethers.getContractFactory("CryptoDickbuttsChained");
+
+    const gifEncoder = await GIFEncoder.deploy();
+    await gifEncoder.deployed();
+    await data.setGIFEncoder(gifEncoder);
+    const gifEncoderReceipt = await data.gifEncoder.deployTransaction.wait();
+    if (DETAILS > 0) {
+      await data.printEvents("Deployed GIFEncoder", gifEncoderReceipt);
+    }
+
+    const pixelRenderer = await PixelRenderer.deploy();
+    await pixelRenderer.deployed();
+    await data.setPixelRenderer(pixelRenderer);
+    const pixelRendererReceipt = await data.pixelRenderer.deployTransaction.wait();
+    if (DETAILS > 0) {
+      await data.printEvents("Deployed PixelRenderer", pixelRendererReceipt);
+    }
+
+    const svgWrapper = await SVGWrapper.deploy();
+    await svgWrapper.deployed();
+    await data.setSVGWrapper(svgWrapper);
+    const svgWrapperReceipt = await data.svgWrapper.deployTransaction.wait();
+    if (DETAILS > 0) {
+      await data.printEvents("Deployed SVGWrapper", svgWrapperReceipt);
+    }
+
+    const tokenURIBuilder = await TokenURIBuilder.deploy();
+    await tokenURIBuilder.deployed();
+    await data.setTokenURIBuilder(tokenURIBuilder);
+    const tokenURIBuilderReceipt = await data.tokenURIBuilder.deployTransaction.wait();
+    if (DETAILS > 0) {
+      await data.printEvents("Deployed TokenURIBuilder", tokenURIBuilderReceipt);
+    }
+
+    const cryptoDickbuttsMetadata = await CryptoDickbuttsMetadata.deploy();
+    await cryptoDickbuttsMetadata.deployed();
+    await data.setCryptoDickbuttsMetadata(cryptoDickbuttsMetadata);
+    const cryptoDickbuttsMetadataReceipt = await data.cryptoDickbuttsMetadata.deployTransaction.wait();
+    if (DETAILS > 0) {
+      await data.printEvents("Deployed CryptoDickbuttsMetadata", cryptoDickbuttsMetadataReceipt);
+    }
+
+    const cryptoDickbuttsBuilder = await CryptoDickbuttsBuilder.deploy();
+    await cryptoDickbuttsBuilder.deployed();
+    await data.setCryptoDickbuttsBuilder(cryptoDickbuttsBuilder);
+    const cryptoDickbuttsBuilderReceipt = await data.cryptoDickbuttsBuilder.deployTransaction.wait();
+    if (DETAILS > 0) {
+      await data.printEvents("Deployed CryptoDickbuttsBuilder", cryptoDickbuttsBuilderReceipt);
+    }
+
+    const cryptoDickbuttsStrings = await CryptoDickbuttsStrings.deploy();
+    await cryptoDickbuttsStrings.deployed();
+    await data.setCryptoDickbuttsStrings(cryptoDickbuttsStrings);
+    const cryptoDickbuttsStringsReceipt = await data.cryptoDickbuttsStrings.deployTransaction.wait();
+    if (DETAILS > 0) {
+      await data.printEvents("Deployed CryptoDickbuttsStrings", cryptoDickbuttsStringsReceipt);
+    }
+
+    const cryptoDickbuttsRandom = await CryptoDickbuttsRandom.deploy();
+    await cryptoDickbuttsRandom.deployed();
+    await data.setCryptoDickbuttsRandom(cryptoDickbuttsRandom);
+    const cryptoDickbuttsRandomReceipt = await data.cryptoDickbuttsRandom.deployTransaction.wait();
+    if (DETAILS > 0) {
+      await data.printEvents("Deployed CryptoDickbuttsRandom", cryptoDickbuttsRandomReceipt);
+    }
+
+    const cryptoDickbuttsChained = await CryptoDickbuttsChained.deploy();
+    await cryptoDickbuttsChained.deployed();
+    await data.setCryptoDickbuttsChained(cryptoDickbuttsChained);
+    const cryptoDickbuttsChainedReceipt = await data.cryptoDickbuttsChained.deployTransaction.wait();
+    if (DETAILS > 0) {
+      await data.printEvents("Deployed CryptoDickbuttsChained", cryptoDickbuttsChainedReceipt);
+    }
 
 
     // const ERC721Mock  = await ethers.getContractFactory("ERC721Mock");
     // const UmswapFactory  = await ethers.getContractFactory("UmswapFactory");
-    // data = new Data();
-    // await data.init();
     //
     // console.log("        --- Setup Accounts, NFT and Umswap Contracts - Assuming gasPrice: " + ethers.utils.formatUnits(data.gasPrice, "gwei") + " gwei, ethUsd: " + ethers.utils.formatUnits(data.ethUsd, 18) + " ---");
     //

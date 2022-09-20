@@ -16,12 +16,24 @@ class Data {
     this.accountNames = {};
     this.contracts = [];
 
+    this.gifEncoder = null;
+    this.pixelRenderer = null;
+    this.svgWrapper = null;
+    this.tokenURIBuilder = null;
+    this.cryptoDickbuttsMetadata = null;
+    this.cryptoDickbuttsBuilder = null;
+    this.cryptoDickbuttsStrings = null;
+    this.cryptoDickbuttsRandom = null;
+    this.cryptoDickbuttsChained = null;
+
+
+    // TODO: Delete
     this.erc721Mock = null;
     this.umswapFactory = null;
     this.umswap = null;
 
-    this.gasPrice = ethers.utils.parseUnits("20", "gwei");
-    this.ethUsd = ethers.utils.parseUnits("2000.00", 18);
+    this.gasPrice = ethers.utils.parseUnits("10", "gwei");
+    this.ethUsd = ethers.utils.parseUnits("1500.00", 18);
 
     this.verbose = false;
   }
@@ -127,10 +139,44 @@ class Data {
     return o;
   }
 
-  async setERC721Mock(erc721Mock) {
-    this.erc721Mock = erc721Mock;
-    this.addContract(erc721Mock, "ERC721Mock");
+  async setGIFEncoder(gifEncoder) {
+    this.gifEncoder = gifEncoder;
+    this.addContract(gifEncoder, "GIFEncoder");
   }
+  async setPixelRenderer(pixelRenderer) {
+    this.pixelRenderer = pixelRenderer;
+    this.addContract(pixelRenderer, "PixelRenderer");
+  }
+  async setSVGWrapper(svgWrapper) {
+    this.svgWrapper = svgWrapper;
+    this.addContract(svgWrapper, "SVGWrapper");
+  }
+  async setTokenURIBuilder(tokenURIBuilder) {
+    this.tokenURIBuilder = tokenURIBuilder;
+    this.addContract(tokenURIBuilder, "TokenURIBuilder");
+  }
+  async setCryptoDickbuttsMetadata(cryptoDickbuttsMetadata) {
+    this.cryptoDickbuttsMetadata = cryptoDickbuttsMetadata;
+    this.addContract(cryptoDickbuttsMetadata, "CryptoDickbuttsMetadata");
+  }
+  async setCryptoDickbuttsBuilder(cryptoDickbuttsBuilder) {
+    this.cryptoDickbuttsBuilder = cryptoDickbuttsBuilder;
+    this.addContract(cryptoDickbuttsBuilder, "CryptoDickbuttsBuilder");
+  }
+  async setCryptoDickbuttsStrings(cryptoDickbuttsStrings) {
+    this.cryptoDickbuttsStrings = cryptoDickbuttsStrings;
+    this.addContract(cryptoDickbuttsStrings, "CryptoDickbuttsStrings");
+  }
+  async setCryptoDickbuttsRandom(cryptoDickbuttsRandom) {
+    this.cryptoDickbuttsRandom = cryptoDickbuttsRandom;
+    this.addContract(cryptoDickbuttsRandom, "CryptoDickbuttsRandom");
+  }
+  async setCryptoDickbuttsChained(cryptoDickbuttsChained) {
+    this.cryptoDickbuttsChained = cryptoDickbuttsChained;
+    this.addContract(cryptoDickbuttsChained, "CryptoDickbuttsChained");
+  }
+
+
   async setUmswapFactory(umswapFactory) {
     this.umswapFactory = umswapFactory;
     this.addContract(umswapFactory, "UmswapFactory");
